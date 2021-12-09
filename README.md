@@ -3,6 +3,9 @@ The AR Entity viewer for Android and iOS devices
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Deploy to GitHub Pages
+`npm run deploy`
+
 ## Available Scripts
 
 In the project directory, you can run:
