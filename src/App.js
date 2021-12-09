@@ -10,12 +10,21 @@ function App() {
   if (para !== null) {
     para = getGithubRawURL(para);
   }
+  var paraIsRealityFile = getParameterByName("isRealityFile");
+  if (paraIsRealityFile !== null) {
+    paraIsRealityFile = (paraIsRealityFile === "true");
+  }
   const [model, setModel] = useState(`${para}`);
   const [submittedModel, setSubmittedModel] = useState(`${para}`);
-  const [usdz, setUsdz] = React.useState(`${(para === null) ? "null" : getUSDZ(para)}`);
-  const [submittedUsdz, setSubmittedUsdz] = useState(`${(para === null) ? "null" : getUSDZ(para)}`);
+  const [usdz, setUsdz] = React.useState(`${(para === null) ? "null" : getUSDZ(para, paraIsRealityFile)}`);
+  const [submittedUsdz, setSubmittedUsdz] = useState(`${(para === null) ? "null" : getUSDZ(para, paraIsRealityFile)}`);
+  const [isRealityFile, setIsRealityFile] = useState(paraIsRealityFile);
   const [enableUsdzField, setEnableUsdzField] = useState(false);
   //console.log(`url: ${getParameterByName("model")}`);
+
+  const handleIsRealityFileChange = (event) => {
+    setIsRealityFile(event.target.checked);
+  }
 
   const handleUsdzCheckboxChange = (evt) => {
     setEnableUsdzField(evt.target.checked);
@@ -35,17 +44,17 @@ function App() {
     setSubmittedModel(m);
     if (enableUsdzField && isURL(usdz)) {
       // use specified usdz location
-      setSubmittedUsdz(`${getUSDZ(getGithubRawURL(usdz))}`);
+      setSubmittedUsdz(`${getUSDZ(getGithubRawURL(usdz), isRealityFile)}`);
     } else {
-      setSubmittedUsdz(`${getUSDZ(m)}`);
+      setSubmittedUsdz(`${getUSDZ(m, isRealityFile)}`);
     }
-    window.location.href = `${window.location.origin}${window.location.pathname}?model=${m}`;
+    window.location.href = `${window.location.origin}${window.location.pathname}?model=${m}&isRealityFile=${isRealityFile}`;
     evt.preventDefault();
   }
 
   return (
     <div className="App container mt-2">
-      <Form onChange={handleChange} url={model} onSubmit={handleSubmit} onUsdzCheckboxChange={handleUsdzCheckboxChange} enableUsdzField={enableUsdzField} onUsdzFieldChange={handleUsdzFieldChange} />
+      <Form onChange={handleChange} url={model} onSubmit={handleSubmit} onUsdzCheckboxChange={handleUsdzCheckboxChange} enableUsdzField={enableUsdzField} onUsdzFieldChange={handleUsdzFieldChange} isRealityFile={isRealityFile} onRealityCheckboxChange={handleIsRealityFileChange} />
       <EntityViewer url={submittedModel} usdz={submittedUsdz} />
     </div>
   );

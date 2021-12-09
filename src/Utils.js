@@ -5,10 +5,11 @@ export const isURL = (t) => {
     return t.match(regex);
 }
 
-export const getUSDZ = (t, price = false) => {
+export const getUSDZ = (t, isRealityFile = false, price = false) => {
+    console.log("isRealityFile", isRealityFile);
     const reg = /\.(gltf|glb)$/gi;
     const suffix = price ? "#applePayButtonType=buy&checkoutTitle=Biplane%20Toy&checkoutSubtitle=Rustic%20finish%20with%20rotating%20propeller&price=$15" : "";
-    return t.replace(reg, `.usdz${suffix}`);
+    return t.replace(reg, isRealityFile ? `.reality${suffix}` : `.usdz${suffix}`);
 }
   
 export const getGithubRawURL = (t) => {

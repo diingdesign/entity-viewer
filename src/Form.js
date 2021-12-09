@@ -16,6 +16,10 @@ const Form = (props) => {
             <small id="modelURLHint" className="form-text text-muted">Upload your model file to github project and copy the link to the file.</small>
         </div>
         <div className="form-check">
+            <input className="form-check-input" type="checkbox" id="realityCheckbox" value="realityCheckbox" onChange={props.onRealityCheckboxChange} checked={props.isRealityFile}/>
+            <label className="form-check-label" for="realityCheckbox">Reality file?</label>
+        </div>
+        <div className="form-check">
             <input className="form-check-input" type="checkbox" id="usdzCheckbox" value="usdzCheckbox" onChange={props.onUsdzCheckboxChange} />
             <label className="form-check-label" for="usdzCheckbox">Specify a USDZ location</label>
         </div>
