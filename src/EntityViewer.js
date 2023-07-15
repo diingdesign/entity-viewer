@@ -19,7 +19,7 @@ const EntityViewer = (props) => {
                     <div class="alert alert-danger" role="alert">Only support glb/glTF files</div>
             }
             <div className="model-viewer-box">
-                <model-viewer ref={modelViewerRef} class="model-viewer" src={`${props.url}`} auto-rotate camera-controls ar ar-scale="auto" alt="model" ios-src={`${props.usdz}`} />
+                <model-viewer ref={modelViewerRef} class="model-viewer" src={`${props.url}`} auto-rotate autoplay camera-controls ar ar-scale="auto" alt="model" ios-src={`${props.usdz}`} />
             </div>
         </div>
         
